@@ -1,0 +1,15 @@
+{
+  "name": "wedding_invite",
+  "version": "1.0.0",
+  "main": "scripts/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "rm -rf dist .parcel-cache && parcel index.html --open --port 3000"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "firebase": "^10.11.1"
+  }
+}
