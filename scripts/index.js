@@ -1,4 +1,4 @@
-import { timeStamp } from "console";
+import { Console, timeStamp } from "console";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -28,17 +28,57 @@ async function addUserData(name, presence) {
   }
 }
 
-console.log("Ну че там");
-
 window.onload = function() {
   setupCountdown();
 };
 
 document.addEventListener("DOMContentLoaded", function() {
+
+  // MARK: - Add listener for button
   var submitButton = document.getElementById("submit-button");
 
   submitButton.addEventListener("click", function() {
     onSubmitButtonDidTapped();
+  });
+
+  // MARK: - Add listener for inputs
+  const nameInput = document.getElementById('name');
+  const presenceSelect = document.getElementById('presence');
+
+  function checkInputs() {
+    const nameValue = nameInput.value.trim();
+    const presenceValue = presenceSelect.value;
+
+    if (nameValue !== '' && presenceValue !== '-Выбрать-') {
+        submitButton.removeAttribute('disabled');
+    } else {
+        submitButton.setAttribute('disabled', true);
+    }
+  }
+
+  nameInput.addEventListener('input', checkInputs);
+  presenceSelect.addEventListener('change', checkInputs);
+
+  // MARK: - Add new guest button
+
+  const plusButton = document.getElementById('plus-button');
+  const rsvpBlockFormGuests = document.querySelector('.rsvp-block-form-guests');
+
+  plusButton.addEventListener('click', function() {
+    const originalDiv = document.querySelector('.rsvp-block-form-field');
+    const cloneDiv = originalDiv.cloneNode(true);
+
+    rsvpBlockFormGuests.appendChild(cloneDiv);
+
+    cloneDiv.style.opacity = 0;
+    setTimeout(function() {
+        cloneDiv.style.opacity = 1;
+    }, 100);
+
+    const inputs = cloneDiv.querySelectorAll('.rsvp-block-form-field-input-textfield');
+    inputs.forEach(input => {
+      input.value = "";
+    });
   });
 });
 
@@ -58,7 +98,6 @@ function isInViewport(element) {
 
 function handleScroll() {
   const elements = document.querySelectorAll('.animatable-appear');
-  console.log(elements)
   elements.forEach(element => {
     if (isInViewport(element)) {
       element.classList.add('appeared');
@@ -69,16 +108,12 @@ function handleScroll() {
 function setupCountdown() {
   var countDownDate = new Date("Aug 11, 2024 16:00:00").getTime();
 
-  // Update the count down every 1 second
   var x = setInterval(function() {
 
-    // Get today's date and time
     var now = new Date().getTime();
 
-    // Find the distance between now and the count down date
     var distance = countDownDate - now;
 
-    // Time calculations for days, hours, minutes and seconds
     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -89,7 +124,6 @@ function setupCountdown() {
     document.getElementById("timer_minutes").innerText = minutes
     document.getElementById("timer_seconds").innerText = seconds
 
-    // If the count down is finished, write some text 
     if (distance < 0) {
       clearInterval(x);
       document.getElementById("demo").innerHTML = "EXPIRED";
@@ -98,12 +132,18 @@ function setupCountdown() {
 }
 
 function onSubmitButtonDidTapped() {
-  let name = document.getElementById("name").value
-
   let presensSelect = document.getElementById("presence")
   let presense = presensSelect.options[presensSelect.selectedIndex].text;
 
-  addUserData(name, presense == "Обязательно буду")
+  var names = []
+  const inputs = document.querySelectorAll('.rsvp-block-form-field-input-textfield');
+  inputs.forEach(input => {
+    names.push(input.value);
+  });
 
-  alert(`${name}, cпасибо за Ваш ответ!`);
+  names.forEach((name) => {
+    addUserData(name, presense == "Обязательно буду")
+  });
+
+  alert(`${names.join(', ')}, cпасибо за Ваш ответ!`);
 }

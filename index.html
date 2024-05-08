@@ -28,7 +28,7 @@
       </p>
     </div>
 
-    <img src="images/middle-banner-test.jpeg" class="main_image animatable-appear">
+    <img src="images/middle-banner-test.jpeg" class="middle_image animatable-appear">
 
     <div class="timing-block">
       <p class="center-text title animatable-appear parisienne-regular">Тайминг</p>
@@ -72,6 +72,17 @@
         </div>
         <!-- Add more events as needed -->
       </div>
+    </div>
+
+    <div class="dresscode-block">
+      <p class="center-text title animatable-appear">
+        ДРЕСС — КОД
+      </p>
+      <p class="center-text text animatable-appear">
+        Мы будем рады, если в своих нарядах вы поддержите цветовую гамму нашей свадьбы:
+      </p>
+
+      <img src="images/dress-code-colors.png" class = "dress-code-colors-image animatable-appear">
     </div>
 
     <div calss="location-block">
@@ -140,12 +151,18 @@
       </p>
 
       <div class="rsvp-block-form">
-        <div class="rsvp-block-form-field">
-          <label for="name" class="text">Имя Фамилия</label>
-          <div>
-              <input type="text" id="name" class="rsvp-block-form-field-input-textfield" placeholder="Имя и фамилия"/>
+        <div class="rsvp-block-form-guests">
+          <div class="rsvp-block-form-field">
+            <label for="name" class="text">Имя Фамилия</label>
+            <div>
+                <input type="text" id="name" class="rsvp-block-form-field-input-textfield" placeholder="Имя и фамилия"/>
+            </div>
           </div>
         </div>
+
+        <button id="plus-button" class="icon-button">
+          <img src="images/plus-icon.svg" alt="Plus Icon">
+        </button>
       
         <div class="rsvp-block-form-field">
             <label for="presence" class="text">Присутствие</label>
@@ -159,7 +176,7 @@
         </div>
 
         <div class="rsvp-block-form-field">
-          <input type="submit" id="submit-button" value="Отправить" class="rsvp-block-form-field-input-button">
+          <input type="submit" id="submit-button" value="Отправить" disabled="true" class="rsvp-block-form-field-input-button">
         </div>
       </div>
     </div>

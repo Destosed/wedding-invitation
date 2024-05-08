@@ -1,6 +1,7 @@
 {
   "name": "wedding_invite",
   "version": "1.0.0",
+  "source": "index.html",
   "main": "scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,5 +12,9 @@
   "description": "",
   "dependencies": {
     "firebase": "^10.11.1"
+  },
+  "devDependencies": {
+    "cssnano": "^7.0.1",
+    "postcss": "^8.4.38"
   }
 }
