@@ -1,6 +1,6 @@
 import { Console, timeStamp } from "console";
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { deleteDoc, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4LYRDCRUXhh-1bASPYuvURA7NDgP_6R0",
@@ -11,26 +11,27 @@ const firebaseConfig = {
   appId: "1:128655647178:web:ae620797e2cab015d36f33"
 };
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const referalCode = urlParams.get('ref')
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 import { collection, addDoc } from 'firebase/firestore';
 
-async function addUserData(name, presence) {
+async function addUserData(name, presence, referal) {
   try {
     const docRef = await addDoc(collection(db, "guests"), {
       name: name,
-      presence: presence
+      presence: presence,
+      referal: referal
     });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 }
-
-window.onload = function() {
-  setupCountdown();
-};
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -52,6 +53,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Hide splash screen when page is fully loaded
   window.onload = function(e) { 
+    setupCountdown();
+
+    setTimeout(function() {
+      console.log('scroll to top');
+      window.scrollTo(0, 0);
+    }, 100);
+
     console.log("window.onload", Date.now());
     splashScreen.style.display = 'none'; // Hide splash screen
     document.getElementById('main-content').style.display = 'block'; // Show main content
@@ -168,12 +176,17 @@ function onSubmitButtonDidTapped() {
   var names = []
   const inputs = document.querySelectorAll('.rsvp-block-form-field-input-textfield');
   inputs.forEach(input => {
-    names.push(input.value);
+    if (input.value != "") {
+      names.push(input.value);
+    }
   });
 
   names.forEach((name) => {
-    addUserData(name, presense == "Обязательно буду")
+    addUserData(name, presense == "Обязательно буду", referalCode);
   });
 
   alert(`${names.join(', ')}, cпасибо за Ваш ответ!`);
+
+  window.scrollTo(0, 0);
+  window.location.reload();
 }

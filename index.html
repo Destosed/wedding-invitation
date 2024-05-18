@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<!--
-  Убедительная просьба не ломать это безобразие 
-  Сайт и так был сделан на коленке
--->
+<!-- Убедительная просьба не ломать это безобразие -->
+<!-- Сайт и так был сделан на коленке -->
+
+<!-- Если кто-то достанет firebase токен и засрет БД, тому наведу порчу на понос -->
 
 <link rel="stylesheet" href="css/style.css">
 
@@ -13,6 +13,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=yes">
     <title>Главная страница</title>
   </head>
 
@@ -22,6 +23,7 @@
       <div class="spinner"></div>
     </div>
 
+    <!-- Wide screen overlay-->
     <div id="wide-screen-view">
       <label class="wide-screen-text">Для просмотра приглашения</label>
       <label class="wide-screen-text">отсканируйте qr-код при помощи камеры вашего телефона</label>
@@ -31,7 +33,11 @@
     <!-- Main Content -->
     <div id="main-content">
 
-      <img src="images/top-banner-test.png" class = "main_image">
+      <!-- <img src="images/top-banner-test.png" class = "main_image"> -->
+      <img src="images/main.JPG" class = "main_image">
+      <div class="scroll-indicator">
+        <div class="arrow"></div>
+      </div>
 
       <div class="color-block">
         <p class="center-text title animatable-appear roboto">Дорогие гости!</h1>
@@ -47,7 +53,8 @@
         </p>
       </div>
 
-      <img src="images/middle-banner-test.jpeg" class="middle_image animatable-appear">
+      <!-- <img src="images/middle-banner-test.jpeg" class="middle_image animatable-appear"> -->
+      <img src="images/main2.JPG" class="middle_image">
 
       <div class="timing-block">
         <p class="center-text title animatable-appear parisienne-regular">Тайминг</p>
@@ -121,6 +128,57 @@
         <!-- <iframe src="https://yandex.com/map-widget/v1/?um=constructor%3A80bd45c3cf248ce395b961bcb5ae05339678cf51a17269d0fa3ff7a236524927&amp;source=constructor" frameborder="0"></iframe> -->
       </div>
 
+      <div class="wishes-block">
+        <p class="center-text title animatable-appear">
+          Наши пожелания
+        </p>
+        <p class="center-text text animatable-appear">
+          Просим вас не дарить пышные букеты.
+          <br />
+          Прекрасной альтернативой им станет бутылочка хорошего вина.
+        </p>
+        <img src="images/bottle_of_wine.png" class="bottle_of_wine_image">
+      </div>
+
+      <div class="rsvp-block">
+        <p class="center-text title animatable-appear">
+          Ваше присутствие
+        </p>
+        <p class="center-text text animatable-appear">
+          Пожалуйста, подтвердите Ваше присутствие
+        </p>
+
+        <div class="rsvp-block-form">
+          <div class="rsvp-block-form-guests">
+            <div class="rsvp-block-form-field">
+              <label for="name" class="text">Имя Фамилия:</label>
+              <div>
+                  <input type="text" id="name" class="rsvp-block-form-field-input-textfield" placeholder="Имя и фамилия"/>
+              </div>
+            </div>
+          </div>
+
+          <button id="plus-button" class="icon-button">
+            <img src="images/plus-icon.svg" alt="Plus Icon">
+          </button>
+        
+          <div class="rsvp-block-form-field">
+              <label for="presence" class="text">Присутствие:</label>
+              <div>
+                  <select id="presence" class="rsvp-block-form-field-input-select">
+                      <option>-Выбрать-</option>
+                      <option>Обязательно буду</option>
+                      <option>Не смогу</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="rsvp-block-form-field">
+            <input type="submit" id="submit-button" value="Отправить" disabled="true" class="rsvp-block-form-field-input-button">
+          </div>
+        </div>
+      </div>
+
       <div class="countdown-block">
         <p class="center-text title animatable-appear">
           Wedding Date
@@ -162,44 +220,18 @@
         </div>
       </div>
 
+      <div class="organizator-block">
+        <p>
+          Если у вас возникнут вопросы, <br /> 
+          можете обращаться к нашему организатору: <br /> <br />
 
-      <div class="rsvp-block">
-        <p class="center-text title animatable-appear">
-          Ваше присутствие
+          Анастасия <br /> 
+          <a href="tel:+7(987)180-37-50">+7 (987) 180 37-50</a> <br /> <br />
+
+          <img src="images/whatsup_logo.svg" class="contact-icon">
+          <img src="images/phone_logo.png" class="contact-icon">
+          <img src="images/telegram_logo.png" class="contact-icon">
         </p>
-        <p class="center-text text animatable-appear">
-          Пожалуйста, подтвердите Ваше присутствие
-        </p>
-
-        <div class="rsvp-block-form">
-          <div class="rsvp-block-form-guests">
-            <div class="rsvp-block-form-field">
-              <label for="name" class="text">Имя Фамилия</label>
-              <div>
-                  <input type="text" id="name" class="rsvp-block-form-field-input-textfield" placeholder="Имя и фамилия"/>
-              </div>
-            </div>
-          </div>
-
-          <button id="plus-button" class="icon-button">
-            <img src="images/plus-icon.svg" alt="Plus Icon">
-          </button>
-        
-          <div class="rsvp-block-form-field">
-              <label for="presence" class="text">Присутствие</label>
-              <div>
-                  <select id="presence" class="rsvp-block-form-field-input-select">
-                      <option>-Выбрать-</option>
-                      <option>Обязательно буду</option>
-                      <option>Не смогу</option>
-                  </select>
-              </div>
-          </div>
-
-          <div class="rsvp-block-form-field">
-            <input type="submit" id="submit-button" value="Отправить" disabled="true" class="rsvp-block-form-field-input-button">
-          </div>
-        </div>
       </div>
     </div>
   </body>
